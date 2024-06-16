@@ -95,9 +95,9 @@ ORDER BY num_unique_users DESC
 LIMIT 5;
 ~~~
 
-Result: ERROR
-→ _What I learned: aggregate functions cannot be used with `GROUP BY`._
-→ _Comment: I don't exactly understand the difference between `GROUP BY` and `ORDER BY`. I guess that `GROUP BY` determines the left>right order of my columns, while `ORDER BY` determines the asc/desc order of the data within those columns? 
+Result: ERROR  
+→ _What I learned: aggregate functions cannot be used with `GROUP BY`._  
+→ _Comment: I don't exactly understand the difference between `GROUP BY` and `ORDER BY`. I guess that `GROUP BY` determines the left>right order of my columns, while `ORDER BY` determines the asc/desc order of the data within those columns?   
 
 
 Query attempt #2
