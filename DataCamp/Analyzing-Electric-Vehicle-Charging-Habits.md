@@ -31,11 +31,15 @@ My progress through the project is as follows.
 
 [x] Created GitHub landing page
 <br>
-[] Tried project once by myself
+[√] Tried project once by myself
 <br>
-[] Checked solution — annotated what I learned if my answer was wrong
+[√] Checked solution — annotated what I learned if my answer was wrong
 <br>
 [] Document will not be edited further
+
+1. Find out how to add anchor-links so you can jump from question to question  
+2. Look into markdown hygiene / styling so I can make this easier to read...  
+
 <br>
 
 ## Preliminary questions
@@ -98,10 +102,10 @@ Now that I know what I'm working with, I'm ready to start working through DataCa
 
 ## Assignment questions
 
-Now tht I know a bit about the table, I am ready to approach the assignment's questions. 
+Now that I know a bit about the table, I am ready to approach the assignment's questions. 
 
 
-### Question 1: Unique users per garage
+### 🎯 Question 1: Unique users per garage
 
 Question text: 
 > Find the number of unique individuals that use each garage’s shared charging stations. The output should contain two columns: garage_id and num_unique_users. Sort your results by the number of unique users from highest to lowest. Save the result as unique_users_per_garage.
@@ -165,12 +169,200 @@ Output:
 
 I noticed that the `num_unique_users` value changed, whereas `garage_id` stayed the same. This tells me that garages can have both `Shared` and `Private` charging stations.
 
-### Question #2: Top 10 charging times
+### 🎯 Question #2: Top 10 charging times
 
 Question text:
 > Find the top 10 most popular charging start times (by weekday and start hour) for sessions that use **shared** charging stations. Your result should contain three columns: `weekdays_plugin`, `start_plugin_hour`, and a column named `num_charging_sessions` containing the number of plugins on that weekday at that hour. Sort your results from the most to the least number of sessions. Save the result as `most_popular_shared_start_times`
 
 Impression: I feel a bit intimidated. But I can see that I will need to do:
 * `WHERE` to filter by `user_type = 'shared'`
-* 
+* `GROUP BY` to arrange according to `weekdays_plugin` and `start_plugin_hour`
+* `COUNT(???)` some arithmetic done with the above two fields to get the amount of start times per hour
+* `ORDER BY` descending, from most to least
+* `LIMIT 10` since I only want the top 10 times
 
+————Query attempt #1
+```
+SELECT weekdays_plugin, start_plugin_hour, COUNT(start_plugin_hour)
+WHERE user_type = 'Shared'
+GROUP BY weekdays_plugin, start_plugin_hour, COUNT(start_plugin_hour)
+ORDER BY COUNT(start_plugin_hour)
+LIMIT 10;
+```
+
+RESULT: ERROR
+1. I forgot to add `FROM`  .........
+2. Again, I've forgotten that aggregate functions cannot be used in `GROUP BY`
+
+————Query attempt #2:
+```
+SELECT weekdays_plugin, start_plugin_hour, COUNT(start_plugin_hour) 
+FROM charging_sessions
+AS num_charging_sessions
+WHERE user_type = 'Shared'
+GROUP BY weekdays_plugin, start_plugin_hour
+ORDER BY COUNT(start_plugin_hour)
+LIMIT 10;
+```
+<details>
+<summary> Which gave me a result of... </summary>
+
+| weekdays_plugin | start_plugin_hour | count |
+|-----------------|-------------------|-------|
+| Monday          | 5                 | 1     |
+| Sunday          | 3                 | 1     |
+| Friday          | 4                 | 1     |
+| Wednesday       | 1                 | 1     |
+| Thursday        | 1                 | 1     |
+| Thursday        | 2                 | 1     |
+| Tuesday         | 2                 | 1     |
+| Wednesday       | 5                 | 1     |
+| Tuesday         | 7                 | 1     |
+| Monday          | 1                 | 1     |
+
+</details>
+
+Impression: 
+* This seems to be wrong. There's only one person charging per hour, and there are many people charging at like 2 AM.
+* Ahh, I sorted ascending, not descending.
+
+————Query attempt #3:
+The above code gave me the _least_ popular charge times. I've changed the `ORDER BY` sort from ASC to DESC to get the _most_ popular charge times. 
+
+```
+SELECT weekdays_plugin, start_plugin_hour, COUNT(start_plugin_hour) 
+FROM charging_sessions
+AS num_charging_sessions
+WHERE user_type = 'Shared'
+GROUP BY weekdays_plugin, start_plugin_hour
+ORDER BY COUNT(start_plugin_hour) DESC
+LIMIT 10;
+```
+<details>
+<summary> And the output now looks much more reasonable: </summary>
+
+| in      | start_plugin_hour | count |
+|---------|-------------------|-------|
+| Sunday  | 17                | 30    |
+| Friday  | 15                | 28    |
+| Thursday| 19                | 26    |
+| Thursday| 16                | 26    |
+| Wednesday| 19               | 25    |
+| Sunday  | 18                | 25    |
+| Sunday  | 15                | 25    |
+| Monday  | 15                | 24    |
+| Friday  | 16                | 24    |
+| Tuesday | 16                | 2     |
+
+</details>
+
+Impression:
+* This makes much more sense. People start charging their car when they get home from work, and the most popular charging day is Sunday, as people are making sure their car is ready for the work week.
+
+### 🎯 Question #3: Super chargers
+Question text:
+> Find the users whose average charging duration last longer than 10 hours when using shared charging stations. Your result should contain two columns: `user_id` and `avg_charging_duration`. Sort your result from highest to lowest average charging duration. Save the result as `long_duration_shared_users`.
+
+Impressions:
+* This seems more straightforward.
+* I know I have a `user_id` key and `duration_hours` field, so I can easily track the total charging time per user with `SUM()`
+* I need to leran how to call rows and columns and commands in SQL...
+* I know I learned something about filtering for results that are above a certain amount, but I don't remember what the command to o that was.
+* Edit: checked notes, looks like it should be `WHERE avg_charging_duration >= 10`
+* I didn't read carefully enough. I'm not looking for `SUM(duration_hours)` but rather `AVG(duration_hours)`
+
+————Query attempt #1:
+```
+SELECT user_id, AVG(duration_hours) AS avg_charging_duration
+FROM charging_sessions
+WHERE AVG(duration_hours) > 10
+  AND WHERE user_type = 'Shared'
+GROUP BY user_id
+ORDER BY avg_charging_duration;
+```
+
+RESULT: ERROR
+* There is a syntax eror near `WHERE` ... is it because I called `AVG(duration_hours)` instead of the alias `avg_charging_hours` ?
+  * Edit: No, this did not resolve the error
+* I have to look it up; I can't figure out my error
+
+————Query attempt #2:
+I'm pretty sure my issue was `WHERE avg_charging_duration = 'Shared'`. The issue is that `AVG(duration_hours)` is an aggregate function, and `WHERE` cannot be used with aggregate functions, so I should instead use `HAVING`. 
+
+```
+SELECT user_id, AVG(duration_hours) AS avg_charging_duration
+FROM charging_sessions
+WHERE user_type ='Shared'
+GROUP BY user_id
+HAVING AVG(duration_hours) > 10
+ORDER BY avg_charging_duration DESC;
+```
+
+Impression: 
+* This seems to have worked!
+* I got an output of 6 users, and each one has a charging time of more than 10 hours.
+
+<details>
+  <summmary> See the 6 users here </summmary>
+
+| user_id  | avg_charging_duration |
+|----------|-----------------------|
+| Share-9  | 16.84583334           |
+| Share-17 | 12.89455555           |
+| Share-25 | 12.21447475           |
+| Share-18 | 12.08880719           |
+| Share-8  | 11.55043084           |
+| AdO3-1   | 10.36938697           |
+  
+</details>
+
+---
+
+## Scoring / reflection
+
+My results were all right! But there were two small errors:
+1. The project was updated. It originally asked #1 to be limited to 5 rows, and this request has since been delted, so I had to remove `LIMIT 5` from my query.
+2. I forgot to alias `COUNT(start_plugin_hour)` as `num_charging_sessions`
+
+Reflections:
+1. Most of my mistakes were not due to issues with SQL, but rather dumb mistakes I made due to not reading instructions carefully enoguh...
+2. I should make a diagram showing which functions can be used with which functions........
+3. I wonder why aggregate functions _can't_ be used with `WHERE`? Is there a good reason for this?
+
+## Answers:
+
+<details>
+  <summary> Question #1 </summary>
+  
+  SELECT garage_id, COUNT(DISTINCT user_id) AS num_unique_users
+FROM charging_sessions
+WHERE user_type = 'Shared'
+GROUP BY garage_id
+ORDER BY num_unique_users DESC;
+
+</details>
+
+<details>
+  <summary> Question #2 </summary>
+
+  SELECT weekdays_plugin, start_plugin_hour, COUNT(start_plugin_hour)  AS num_charging_sessions
+FROM charging_sessions
+AS num_charging_sessions
+WHERE user_type = 'Shared'
+GROUP BY weekdays_plugin, start_plugin_hour
+ORDER BY COUNT(start_plugin_hour) DESC
+LIMIT 10;
+  
+</details>
+
+<details>
+  <summary> Question #1 </summary>
+
+  SELECT user_id, AVG(duration_hours) AS avg_charging_duration
+FROM charging_sessions
+WHERE user_type ='Shared'
+GROUP BY user_id
+HAVING AVG(duration_hours) > 10
+ORDER BY avg_charging_duration DESC; 
+  
+</details>
