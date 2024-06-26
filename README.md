@@ -5,7 +5,7 @@ Each project will follow roughly the same macro structure:
 
 1. Problem introduction
 2. Preliminary questions / database exploration
-3. Assignment questions (+ discussion/learning/qusetions if my query is incorrect)
+3. Assignment questions (_+ discussion/learning/questions if my query is incorrect_)
 4. A reflection on what I learned
 5. My final solution
 
