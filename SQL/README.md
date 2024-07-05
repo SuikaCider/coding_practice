@@ -16,7 +16,7 @@ For lack of initial direction, I've set an initial goal of passing [DataCamp's "
 
 I really enjoy project-based learning, so I figure that I will just work through all the projects:
 
-1. [11 SQL projects from DataCamp](https://github.com/SuikaCider/coding_practice/new/main/DataCamp/SQL) (currently 3/11)  
+1. [11 SQL projects from DataCamp](https://github.com/SuikaCider/coding_practice/tree/main/SQL/DataCamp) (currently 3/11)  
 2. [HackerRank's 39 "basic" SQL tasks](https://www.hackerrank.com/domains/sql?filters%5Bskills%5D%5B%5D=SQL%20%28Basic%29)
 3. [LeetCode's "SQL 50" challenge](https://leetcode.com/studyplan/top-sql-50/) (currently 5/50)
 
