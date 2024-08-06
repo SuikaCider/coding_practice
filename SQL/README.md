@@ -1,5 +1,7 @@
 # SQL Roadmap
 
+*// Curently on a hiatus through Python (goal: become able to solve easy problems on Leetcode) and JavaScript (goal: conquer the world of [Screeps](https://screeps.com/) )*
+
 For lack of initial direction, I've set an initial goal of passing [DataCamp's "SQL Associate" certification test](https://www.datacamp.com/certification/sql-associate). In order to pass this test, I will need to complete their `SQL Fundamentals` roadmap, which includes:
 
 1. [√] Introduction to SQL (2 hrs)  
