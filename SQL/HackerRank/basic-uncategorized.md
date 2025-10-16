@@ -334,3 +334,129 @@ And that worked!
 </details>
 
 --- 
+
+## [Japanese cities attributes](https://www.hackerrank.com/challenges/japanese-cities-attributes/problem?isFullScreen=true)
+
+<details>
+<summary> Expand to see chicken scratch </summary>
+
+_Query all attributes of every Japanese city in the CITY table. The COUNTRYCODE for Japan is JPN._
+
+_The CITY table is described as follows:_
+
+```
+| Field       | Type           |
+|-------------|----------------|
+| ID          | NUMBER         |
+| NAME        | VARCHAR2(17)   |
+| COUNTRYCODE | VARCHAR2(3)    |
+| DISTRICT    | VARCHAR2(20)   |
+| POPULATION  | NUMBER         |
+```
+
+### My attempts
+
+<details>
+<summary> ✅ Attempt #1</summary>
+
+I tried:
+
+  ```
+SELECT * 
+FROM CITY
+WHERE COUNTRYCODE = 'JPN';
+  ```
+
+Again, easy. 
+
+</details>
+
+
+### Key learnings
+
+🧠 N/A
+❓ N/A
+
+</details>
+
+--- 
+
+## [Japanese cities' names]([url](https://www.hackerrank.com/challenges/japanese-cities-name/problem?isFullScreen=true))
+
+<details>
+<summary> Expand to see chicken scratch </summary>
+
+_Query the names of all the Japanese cities in the CITY table. The COUNTRYCODE for Japan is JPN._
+_The CITY table is described as follows:_
+
+```
+| Field       | Type           |
+|-------------|----------------|
+| ID          | NUMBER         |
+| NAME        | VARCHAR2(17)   |
+| COUNTRYCODE | VARCHAR2(3)    |
+| DISTRICT    | VARCHAR2(20)   |
+| POPULATION  | NUMBER         |
+```
+
+### My attempts
+
+<details>
+<summary> ✅ Attempt #1</summary>
+
+I tried:
+
+  ```
+SELECT NAME
+FROM CITY
+WHERE COUNTRYCODE = 'JPN';
+  ```
+
+And was right. 
+
+</details>
+
+
+### Key learnings
+
+🧠 n/a
+❓ n/a
+
+</details>
+
+--- 
+## [Task](url)
+
+<details>
+<summary> Expand to see chicken scratch </summary>
+
+taskhere
+
+```
+codestubhere
+```
+
+### My attempts
+
+<details>
+<summary> ❌✅ Attempt #1</summary>
+
+I tried:
+
+  ```
+querygoeshere
+  ```
+
+commentgoeshere
+
+</details>
+
+
+### Key learnings
+
+🧠 bigbrainstuffhere
+❓ questionshere
+
+</details>
+
+--- 
