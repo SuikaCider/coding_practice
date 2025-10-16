@@ -335,7 +335,7 @@ And that worked!
 
 --- 
 
-## [Japanese cities attributes](https://www.hackerrank.com/challenges/japanese-cities-attributes/problem?isFullScreen=true)
+## [Japanese Cities' Attributes](https://www.hackerrank.com/challenges/japanese-cities-attributes/problem?isFullScreen=true)
 
 <details>
 <summary> Expand to see chicken scratch </summary>
@@ -381,7 +381,7 @@ Again, easy.
 
 --- 
 
-## [Japanese cities' names]([url](https://www.hackerrank.com/challenges/japanese-cities-name/problem?isFullScreen=true))
+## [Japanese Cities' Names](https://www.hackerrank.com/challenges/japanese-cities-name/problem?isFullScreen=true)
 
 <details>
 <summary> Expand to see chicken scratch </summary>
