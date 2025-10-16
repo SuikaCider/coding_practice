@@ -155,3 +155,49 @@ This returned the names of the cities, as requested.
 🧠 The reason I queried `*` previously is because the task was `query all columns`. This task specifically requested to return `NAME`.
 
 </details> 
+
+---
+
+## [3. Select All](https://www.hackerrank.com/challenges/select-all-sql/problem?isFullScreen=true)
+
+<details>
+<summary> Expand to see chicken scratch </summary>
+
+_Query all columns (attributes) for every row in the CITY table._
+
+_The CITY table is described as follows:_
+
+```
+| Field       | Type           |
+|-------------|----------------|
+| ID          | NUMBER         |
+| NAME        | VARCHAR2(17)   |
+| COUNTRYCODE | VARCHAR2(3)    |
+| DISTRICT    | VARCHAR2(20)   |
+| POPULATION  | NUMBER         |
+```
+
+### My attempts
+
+<details>
+<summary> ✅ Attempt #1</summary>
+
+I tried:
+
+  ```
+SELECT ALL
+FROM CITY
+  ```
+
+Which is of course super easy. Why wasnt this the first question 😭
+
+</details>
+
+### Key learnings
+
+🧠 N/A  
+❓ N/A  
+
+</details>
+
+--- 
