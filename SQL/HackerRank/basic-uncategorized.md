@@ -4,11 +4,17 @@ Basic SQL tasks from HackerRank that are not related to the (a) demographics ass
 
 Note: At the time of doing these tasks, I have not used/read SQL or Python for over one year. 
 
+## Key learnings & Questions
+
+🧠 Remember to end lines in `;`
+❓ Is there ever a time where I will `SELECT` something other than `*` ?
+
 ## [1. Basic Select](https://www.hackerrank.com/challenges/revising-the-select-query/problem?isFullScreen=true)
 
 <details>
 <summary> Expand to see chicken scratch </summary>
-_Query all columns for all American cities in the CITY table with populations larger than 100000. The CountryCode for America is USA._
+
+  _Query all columns for all American cities in the CITY table with populations larger than 100000. The CountryCode for America is USA._
 
 _The CITY table is described as follows:_
 
@@ -62,7 +68,7 @@ And this worked. First problem of the book passed 😅
 
 ### Key learnings
 
-🧠 I forgot a lot... 
+🧠 I forgot a lot...  
 ❓ Is there ever a time where I will want to select something other than `*`?
 
 </details>
