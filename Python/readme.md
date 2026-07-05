@@ -1,5 +1,8 @@
 # Python Roadmap
 
+
+// this is out of date and needs to be cleaned
+
 I didn't expect to start learning Python right now, but after getting really into JavaScript via the game BitBurner (see [JS roadmap](https://github.com/SuikaCider/coding_practice/tree/main/JavaScript)), I started looking into other "learn by playing a game" approaches to programming. That led me to discover [Boot.dev](https://www.boot.dev/u/quirkydish22), a product in which you learn backend development (python/Go/SQL/JS) by building a role-playing game. 
   
 The first portion of Boot.dev's curriculum is conducted in Python, so my Python journey starts there. 
